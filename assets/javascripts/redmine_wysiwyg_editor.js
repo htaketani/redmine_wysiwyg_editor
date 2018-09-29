@@ -76,7 +76,19 @@ RedmineWysiwygEditor.prototype.init = function(editorSetting) {
 
   self._jstEditor.after(editorHtml + previewHtml + modeTabHtml);
 
-  self._jstElements = container.find('.jstElements');
+  var jstTabs = container.find('.jstTabs');
+
+  self._newPreviewAccess = (jstTabs.length > 0);
+
+  if (self._newPreviewAccess) {
+    self._jstElements = jstTabs;
+
+    jstTabs.find('ul li').has('.tab-edit, .tab-preview').hide();
+    jstTabs.find('ul').css({ 'border-bottom': 'none', 'padding-left': 0 });
+  } else {
+    self._jstElements = container.find('.jstElements');
+  }
+
   self._jstEditorTextArea = self._jstEditor.find('textarea');
   self._visualEditor = container.find('.wysiwyg-editor').hide();
   self._preview = container.find('.wysiwyg-editor-preview').hide();
@@ -373,8 +385,10 @@ RedmineWysiwygEditor.prototype._setVisualContent = function() {
     var escapeText = (self._format === 'textile') ?
         escapeTextile : escapeMarkdown;
 
+    var indexName = self._newPreviewAccess ? 'text' : textarea[0].name;
+
     var data = {};
-    data[textarea[0].name] =
+    data[indexName] =
       escapeText(textarea[0].value.replace(/\$/g, '$$$$'))
       .replace(/\{\{/g, '{$${')
       .replace(/\[\[/g, '[$$[')
@@ -392,7 +406,7 @@ RedmineWysiwygEditor.prototype._setVisualContent = function() {
       .replace(/version:/g, 'versioin$$:')
       .replace(/#([1-9][0-9]*((#note)?-[1-9][0-9]*)?(\s|$))/g, '#$$$1')
       .replace(/r([1-9][0-9]*(\s|$))/g, 'r$$$1')
-      + ' ';
+      + '&nbsp;';
 
     params.push($.param(data));
 
@@ -845,13 +859,17 @@ RedmineWysiwygEditor.prototype._setPreview = function() {
   var previewData = function(textarea) {
     var params = [$.param($("input[name^='attachments']"))];
 
+    var indexName = self._newPreviewAccess ? 'text' : textarea[0].name;
+
     var data = {};
-    data[textarea[0].name] = textarea[0].value + ' ';
+    data[indexName] = textarea[0].value + ' ';
 
     params.push($.param(data));
 
     return params.join('&');
   };
+
+  self._preview.css('min-height', self._visualEditor.height());
 
   $.ajax({
     type: 'POST',

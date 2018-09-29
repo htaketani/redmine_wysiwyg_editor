@@ -24,11 +24,11 @@ if content_for(:header_tags).present? && content_for(:header_tags).include?('/js
     <script>
 function initRedmineWysiwygEditor() {
   var previewButton = $('a[accesskey=r]');
+  var previewTab = $('.jstTabs .tab-preview');
 
-  if (previewButton.length == 0) return;
-
-  var previewUrl = previewButton.attr('onclick')
-      .match(/submitPreview\("(.+?)",/)[1];
+  var previewUrl = (previewButton.length > 0) ?
+      previewButton.attr('onclick').match(/submitPreview\("(.+?)",/)[1] :
+      previewTab.data('url');
 
   if (!previewUrl) return;
 
