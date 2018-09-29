@@ -63,7 +63,7 @@ RedmineWysiwygEditor.prototype.init = function(editorSetting) {
 
   var editorHtml = '<div class="wysiwyg-editor"><div></div></div>';
 
-  var previewHtml = '<div class="wysiwyg-editor-preview wiki"></div>';
+  var previewHtml = '<div class="wysiwyg-editor-preview wiki wiki-preview"></div>';
 
   var modeTabHtml = '<div class="wysiwyg-editor-tab"><ul>' +
       '<li><a href="#" data-type="text" class="active">' +
