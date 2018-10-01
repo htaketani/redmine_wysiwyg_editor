@@ -1,3 +1,20 @@
+.jstTabs {
+  display: none;
+}
+
+#content .jstBlock .jstTabs ul {
+  border-bottom: none;
+  padding-left: 0;
+}
+
+#content .jstBlock .jstTabs ul li:not(.tab-elements) {
+  display: none;
+}
+
+#content .jstBlock .jstTabs .jstElements {
+  padding: 3px 3px 6px 0;
+}
+
 .wysiwyg-editor {
   padding-right: 2px;
 }

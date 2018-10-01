@@ -78,15 +78,12 @@ RedmineWysiwygEditor.prototype.init = function(editorSetting) {
 
   var jstTabs = container.find('.jstTabs');
 
-  self._newPreviewAccess = (jstTabs.length > 0);
-
-  if (self._newPreviewAccess) {
+  if (jstTabs.length > 0) {
     self._jstElements = jstTabs;
-
-    jstTabs.find('ul li').has('.tab-edit, .tab-preview').hide();
-    jstTabs.find('ul').css({ 'border-bottom': 'none', 'padding-left': 0 });
+    self._oldPreviewAccess = false;
   } else {
     self._jstElements = container.find('.jstElements');
+    self._oldPreviewAccess = true;
   }
 
   self._jstEditorTextArea = self._jstEditor.find('textarea');
@@ -385,7 +382,7 @@ RedmineWysiwygEditor.prototype._setVisualContent = function() {
     var escapeText = (self._format === 'textile') ?
         escapeTextile : escapeMarkdown;
 
-    var indexName = self._newPreviewAccess ? 'text' : textarea[0].name;
+    var indexName = self._oldPreviewAccess ? textarea[0].name : 'text';
 
     var data = {};
     data[indexName] =
@@ -859,7 +856,7 @@ RedmineWysiwygEditor.prototype._setPreview = function() {
   var previewData = function(textarea) {
     var params = [$.param($("input[name^='attachments']"))];
 
-    var indexName = self._newPreviewAccess ? 'text' : textarea[0].name;
+    var indexName = self._oldPreviewAccess ? textarea[0].name : 'text';
 
     var data = {};
     data[indexName] = textarea[0].value + ' ';
