@@ -2,8 +2,12 @@
   display: none;
 }
 
+.jstEditor {
+  /* For getting the height of the original textarea */
+  visibility: hidden;
+}
+
 #content .jstBlock .jstTabs ul {
-  border-bottom: none;
   padding-left: 0;
 }
 

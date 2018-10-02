@@ -23,12 +23,11 @@ if content_for(:header_tags).present? && content_for(:header_tags).include?('/js
     <% html_tag_allowed = textilizable('<div></div>').include?('<div></div>') %>
     <script>
 function initRedmineWysiwygEditor() {
-  var previewButton = $('a[accesskey=r]');
   var previewTab = $('.jstTabs .tab-preview');
+  var previewButton = $('a[accesskey=r]');
 
-  var previewUrl = (previewButton.length > 0) ?
-      previewButton.attr('onclick').match(/submitPreview\("(.+?)",/)[1] :
-      previewTab.data('url');
+  var previewUrl = (previewTab.length > 0) ? previewTab.data('url') :
+      previewButton.attr('onclick').match(/submitPreview\("(.+?)",/)[1];
 
   if (!previewUrl) return;
 
