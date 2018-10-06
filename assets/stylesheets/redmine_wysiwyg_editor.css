@@ -3,7 +3,7 @@
 }
 
 .jstEditor {
-  /* For getting the height of the original textarea */
+  /* Not "display:none" but this to get the height of the original textarea. */
   visibility: hidden;
 }
 
