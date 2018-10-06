@@ -383,10 +383,10 @@ RedmineWysiwygEditor.prototype._setVisualContent = function() {
     var escapeText = (self._format === 'textile') ?
         escapeTextile : escapeMarkdown;
 
-    var indexName = self._oldPreviewAccess ? textarea[0].name : 'text';
+    var name = self._oldPreviewAccess ? textarea[0].name : 'text';
 
     var data = {};
-    data[indexName] =
+    data[name] =
       escapeText(textarea[0].value.replace(/\$/g, '$$$$'))
       .replace(/\{\{/g, '{$${')
       .replace(/\[\[/g, '[$$[')
@@ -947,10 +947,10 @@ RedmineWysiwygEditor.prototype._setPreview = function() {
   var previewData = function(textarea) {
     var params = [$.param($("input[name^='attachments']"))];
 
-    var indexName = self._oldPreviewAccess ? textarea[0].name : 'text';
+    var name = self._oldPreviewAccess ? textarea[0].name : 'text';
 
     var data = {};
-    data[indexName] = textarea[0].value + ' ';
+    data[name] = textarea[0].value + ' ';
 
     params.push($.param(data));
 
