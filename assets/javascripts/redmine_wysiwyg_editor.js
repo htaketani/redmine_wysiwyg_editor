@@ -63,7 +63,7 @@ RedmineWysiwygEditor.prototype.init = function(editorSetting) {
 
   var editorHtml = '<div class="wysiwyg-editor"><div></div></div>';
 
-  var previewHtml = '<div class="wysiwyg-editor-preview wiki wiki-preview"></div>';
+  var previewHtml = '<div class="wysiwyg-editor-preview wiki"></div>';
 
   var modeTabHtml = '<div class="wysiwyg-editor-tab"><ul>' +
       '<li><a href="#" data-type="text" class="active">' +
@@ -74,7 +74,14 @@ RedmineWysiwygEditor.prototype.init = function(editorSetting) {
       self._i18n.preview + '</a></li>' +
       '</ul></div>';
 
-  self._jstEditor.after(editorHtml + previewHtml + modeTabHtml);
+  self._jstEditorTextArea = self._jstEditor.find('textarea');
+
+  self._jstEditorTextArea.after(previewHtml);
+  self._jstEditor.after(editorHtml + modeTabHtml);
+
+  self._visualEditor = container.find('.wysiwyg-editor').hide();
+  self._preview = container.find('.wysiwyg-editor-preview').hide();
+  self._modeTab = container.find('.wysiwyg-editor-tab');
 
   var jstTabs = container.find('.jstTabs');
   var jstElements = container.find('.jstElements');
@@ -85,15 +92,12 @@ RedmineWysiwygEditor.prototype.init = function(editorSetting) {
 
     jstTabs.hide();
     jstElements.css('visibility', 'visible');
+
+    self._preview.addClass('wiki-preview');
   } else {
     self._jstElements = jstElements;
     self._oldPreviewAccess = true;
   }
-
-  self._jstEditorTextArea = self._jstEditor.find('textarea');
-  self._visualEditor = container.find('.wysiwyg-editor').hide();
-  self._preview = container.find('.wysiwyg-editor-preview').hide();
-  self._modeTab = container.find('.wysiwyg-editor-tab');
 
   self._modeTab.on('click', 'li a', function(e) {
     e.preventDefault();
@@ -142,14 +146,16 @@ RedmineWysiwygEditor.prototype.changeMode = function(mode) {
   case 'preview':
     self._setPreview();
     self._preview.show();
+    self._jstEditor.show();
 
     self._jstElements.hide();
-    self._jstEditor.hide();
+    self._jstEditorTextArea.hide();
     self._visualEditor.hide();
     break;
   default:
     // Note text content is set by blur event.
     self._jstElements.show();
+    self._jstEditorTextArea.show();
     self._jstEditor.show();
 
     self._visualEditor.hide();
