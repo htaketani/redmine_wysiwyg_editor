@@ -77,12 +77,15 @@ RedmineWysiwygEditor.prototype.init = function(editorSetting) {
   self._jstEditor.after(editorHtml + previewHtml + modeTabHtml);
 
   var jstTabs = container.find('.jstTabs');
+  var jstElements = container.find('.jstElements');
 
   if (jstTabs.length > 0) {
     self._jstElements = jstTabs;
     self._oldPreviewAccess = false;
+    jstTabs.hide();
+    jstElements.css('visibility', 'visible');
   } else {
-    self._jstElements = container.find('.jstElements');
+    self._jstElements = jstElements;
     self._oldPreviewAccess = true;
   }
 
@@ -192,6 +195,7 @@ RedmineWysiwygEditor.prototype._initTinymce = function(setting) {
     });
 
     self.changeMode(self._defaultMode.get());
+    self._jstElements.css('visibility', 'visible');
     self._jstEditor.css('visibility', 'visible');
 
     self._postInit();
