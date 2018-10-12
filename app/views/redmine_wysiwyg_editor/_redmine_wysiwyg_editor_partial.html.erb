@@ -30,26 +30,17 @@ if content_for(:header_tags).present? && content_for(:header_tags).include?('/js
 }
 
 #content .jstBlock .jstTabs.tabs {
-  position: inherit;
+  width: 100%;
   height: auto;
 }
 
 #content .jstBlock .jstTabs ul {
-  position: inherit;
-  margin: 0;
-  padding: 0;
-  width: auto;
+  height: auto;
 }
 
 #content .jstBlock .jstTabs li {
-  float: none;
-  position: inherit;
-  margin: 0;
-  padding: 0;
   height: auto;
-
-  /* For mobile screen */
-  white-space: normal;
+  margin: 0;
 }
 
 #content .jstBlock .jstTabs ul li:not(.tab-elements) {
@@ -57,9 +48,6 @@ if content_for(:header_tags).present? && content_for(:header_tags).include?('/js
 }
 
 #content .jstBlock .jstTabs .jstElements {
-  padding: 3px 3px 6px 0;
-
-  /* For mobile screen */
   height: auto;
 }
     </style>
