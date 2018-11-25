@@ -237,8 +237,8 @@ RedmineWysiwygEditor.prototype._initTinymce = function(setting) {
     },
     table_appearance_options: false,
     table_advtab: false,
-    table_cell_advtab: false,
-    table_row_advtab: false,
+    table_cell_advtab: true,
+    table_row_advtab: true,
     table_default_styles: {}
   }, setting, {
     // Mandatory parameters
