@@ -224,7 +224,7 @@ RedmineWysiwygEditor.prototype._initTinymce = function(setting) {
     content_style: style,
     height: self._jstEditorTextArea.height(),
     branding: false,
-    plugins: 'link image lists hr table textcolor',
+    plugins: 'link image lists hr table textcolor paste',
     menubar: false,
     toolbar: toolbar,
     toolbar_items_size: 'small',
